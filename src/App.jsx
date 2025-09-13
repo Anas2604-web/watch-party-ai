@@ -1,13 +1,16 @@
 import './App.css'
+import Header from './components/Header'
+import { Outlet } from 'react-router-dom'
 
 
 
 
 function App() {
   return (
-   <p
-   className="font-bold bg-amber-200" >op
-   </p>
+     <>
+    <Header />
+    <Outlet />
+    </>
   )
   
 }
