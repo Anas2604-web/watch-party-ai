@@ -1,8 +1,30 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ValidateData } from "../utils/validate";
 
 const Login = () => {
  
     const [isSignedIn, setIsSignedIn] = useState(true);
+    const [error, setError] = useState(null);
+    
+
+    const username = useRef(null);
+    const email = useRef(null);
+    const password = useRef(null);
+    
+    const validateUserData = () => {
+        const userName = username?.current?.value;
+        const userEmail = email?.current?.value;
+        const userPassword = password?.current?.value;
+
+        console.log(userName, userEmail, userPassword);
+
+        const { valid, message } = ValidateData(isSignedIn ? null : userName, userEmail, userPassword);
+        if (!valid) {
+            setError(message);
+            return false;
+        }
+        return true;
+    }
 
     const handleToggle = () => {
         setIsSignedIn(!isSignedIn);
@@ -22,14 +44,16 @@ const Login = () => {
 
       {/* Login Box */}
       <div className="relative bg-black/75 p-8 rounded-md w-full max-w-md text-white">
-        <h1 className="text-3xl font-bold mb-6">Sign In</h1>
-        <form className="flex flex-col space-y-4">
+        <h1 className="text-3xl font-bold mb-6"> {isSignedIn? "Sign In": "Sign Up"} </h1>
+        <form onSubmit={(e) => { e.preventDefault()}} 
+         className="flex flex-col space-y-4">
           {!isSignedIn && <div className="flex flex-col">
             <label htmlFor="username" className="text-sm mb-1">
               Username
             </label>
             <input
               type="text"
+              ref={username}
               id="username"
               name="username"
               required
@@ -43,6 +67,7 @@ const Login = () => {
             </label>
             <input
               type="email"
+              ref={email}   
               id="email"
               name="email"
               required
@@ -56,6 +81,7 @@ const Login = () => {
             </label>
             <input
               type="password"
+              ref={password}   
               id="password"
               name="password"
               required
@@ -63,8 +89,13 @@ const Login = () => {
             />
           </div>
 
+          <p className="text-red-500">{error}
+            
+          </p>
+
           <button
             type="submit"
+            onClick={validateUserData}
             className="bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold"
           >
             Login
