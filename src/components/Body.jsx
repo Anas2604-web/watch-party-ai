@@ -23,7 +23,6 @@ const Body = () => {
           uid:uid,
         })
       );
-      Navigate("/browse");
     } else {
       // User is signed out
       console.log("user is signed out");
