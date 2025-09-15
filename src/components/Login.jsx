@@ -1,13 +1,16 @@
 import { useRef, useState } from "react";
 import { ValidateData } from "../utils/validate";
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
  
     const [isSignedIn, setIsSignedIn] = useState(true);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
     const Navigate = useNavigate();
     
@@ -35,6 +38,24 @@ const Login = () => {
               .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
+                updateProfile(user, {
+                  displayName: userName, photoURL: "https://avatars.githubusercontent.com/u/185629397?v=4"
+                }).then(() => {
+                  // Profile updated!
+                  const {uid,email,displayName,photoURL} = auth.currentUser;
+                        dispatch(
+                          addUser({
+                            displayName: displayName,
+                            email: email,
+                            uid:uid,
+                            photoURL: photoURL,
+                          })
+                        );
+                  Navigate("/browse");
+                }).catch((error) => {
+                  // An error occurred
+                  setError(error.message);
+                });
                 console.log(user);
                 Navigate("/browse");
               })
@@ -47,18 +68,30 @@ const Login = () => {
         }
         else {
             // Sign in logic here
-            signInWithEmailAndPassword(auth, userEmail, userPassword)
-            .then((userCredential) => {
-              // Signed in 
-              const user = userCredential.user;
-              console.log(user);
-              Navigate("/browse");
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              setError(errorCode + " - " + errorMessage);
-            });
+           signInWithEmailAndPassword(auth, userEmail, userPassword)
+           .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("Signed in user:", user);
+
+            const { uid, email, displayName, photoURL } = user;
+            dispatch(
+              addUser({
+                uid,
+                email,
+                displayName,
+                photoURL,
+              })
+            );
+
+            Navigate("/browse");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorCode + " - " + errorMessage);
+          });
+
                       
         }
         return true;
@@ -134,9 +167,9 @@ const Login = () => {
           <button
             type="submit"
             onClick={validateUserData}
-            className="bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold"
+            className="bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold mt-4 cursor-pointer"
           >
-            Login
+            {isSignedIn ? "Sign In" : "Sign Up"}
           </button>
         </form>
 

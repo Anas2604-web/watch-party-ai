@@ -14,13 +14,14 @@ const Body = () => {
    onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in
-      const {uid,email,displayName} = user;
+      const {uid,email,displayName,photoURL} = user;
       console.log("user is signed in");
       dispatch(
         addUser({
-          name: displayName,
+          displayName: displayName,
           email: email,
           uid:uid,
+          photoURL: photoURL,
         })
       );
     } else {

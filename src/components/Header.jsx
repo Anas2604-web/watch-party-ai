@@ -1,11 +1,13 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const BRAND_RED = "#E50914"; 
 
 const Header = () => {
   const Navigate = useNavigate();
+  const user = useSelector((store) => store.user);
 
   const handleSignOut = () => {
      signOut(auth).then(() => {
@@ -37,8 +39,7 @@ const Header = () => {
             <div className="hover:text-white transition cursor-pointer">Live</div>
           </div>
         </div>
-
-        {/* right: search + avatar + sign out */}
+        {/* right: search + kids + avatar */}
         <div className="flex items-center gap-4">
           <div className="hidden sm:block">
             <input
@@ -67,23 +68,29 @@ const Header = () => {
           </button>
 
           {/* avatar */}
-          <div className="w-9 h-9 rounded-md overflow-hidden border border-white/10">
-            <img
-              src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"
-              alt="profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
+      {user && (
+  <div className="flex items-center gap-3">
+    {/* avatar */}
+    <div className="w-9 h-9 rounded-md overflow-hidden border border-white/10">
+      <img
+        src={user?.photoURL || "https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"}
+        alt="profile"
+        className="w-full h-full object-cover"
+      />
+    </div>
 
-          {/* sign out */}
-          <button 
-           onClick={() => {
-             handleSignOut();
-           }}
-           className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition">
-            Sign Out
-          </button>
+    {/* sign out button */}
+    <button
+      onClick={handleSignOut}
+      className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
+    >
+      Sign Out
+    </button>
+  </div>
+)}
+
         </div>
+        
       </div>
     </header>
   );
