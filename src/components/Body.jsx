@@ -1,39 +1,5 @@
-
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../utils/firebase";
-
+import React from "react";
 const Body = () => {
-  const dispatch = useDispatch();
-
-
-  useEffect(() => {
-
-   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in
-      const {uid,email,displayName,photoURL} = user;
-      console.log("user is signed in");
-      dispatch(
-        addUser({
-          displayName: displayName,
-          email: email,
-          uid:uid,
-          photoURL: photoURL,
-        })
-      );
-    } else {
-      // User is signed out
-      console.log("user is signed out");
-      dispatch(removeUser());
-      Navigate("/");
-    }
-  });
-     
-  },[]);
-
   
 
 

@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { ValidateData } from "../utils/validate";
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
@@ -11,8 +10,6 @@ const Login = () => {
     const [isSignedIn, setIsSignedIn] = useState(true);
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
-
-    const Navigate = useNavigate();
     
 
     const username = useRef(null);
@@ -51,13 +48,13 @@ const Login = () => {
                             photoURL: photoURL,
                           })
                         );
-                  Navigate("/browse");
+                  
                 }).catch((error) => {
                   // An error occurred
                   setError(error.message);
                 });
                 console.log(user);
-                Navigate("/browse");
+
               })
               .catch((error) => {
                 const errorCode = error.code;
@@ -84,7 +81,6 @@ const Login = () => {
               })
             );
 
-            Navigate("/browse");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -102,7 +98,9 @@ const Login = () => {
     }
 
   return (
+
     <div className="w-screen h-screen flex items-center justify-center bg-black">
+      
       {/* Background image with overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"
