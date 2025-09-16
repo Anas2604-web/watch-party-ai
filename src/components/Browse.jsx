@@ -1,36 +1,22 @@
 import Header from "./Header";
+import { API_OPTIONS } from "../utils/constants";
+import { useEffect } from "react";
 
-const posters = [
-  "https://picsum.photos/400/600?random=1",
-  "https://picsum.photos/400/600?random=2",
-  "https://picsum.photos/400/600?random=3",
-  "https://picsum.photos/400/600?random=4",
-  "https://picsum.photos/400/600?random=5",
-  "https://picsum.photos/400/600?random=6",
-  "https://picsum.photos/400/600?random=7",
-];
 
-const PosterRow = ({ title }) => (
-  <div className="px-6 my-8">
-    <h2 className="text-xl font-bold text-white mb-4">{title}</h2>
-    <div className="flex space-x-4 overflow-x-scroll scrollbar-hide">
-      {posters.map((src, idx) => (
-        <div
-          key={idx}
-          className="w-40 flex-shrink-0 transform hover:scale-110 transition duration-300 ease-in-out cursor-pointer"
-        >
-          <img
-            src={src}
-            alt={`poster-${idx}`}
-            className="w-full h-auto rounded-lg shadow-md"
-          />
-        </div>
-      ))}
-    </div>
-  </div>
-);
 
 const Browse = () => {
+   
+  const getPlayingMovies = async () => {
+      const data =  await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', API_OPTIONS);
+      const json = await data.json();
+      console.log(json);
+
+  }
+
+  useEffect(() => {
+    getPlayingMovies();
+  },[]);
+
   return (
     <div className="bg-black min-h-screen text-white">
       <Header />
@@ -54,10 +40,6 @@ const Browse = () => {
         </div>
       </div>
 
-      {/* Poster Rows */}
-      <PosterRow title="Trending Now" />
-      <PosterRow title="Watch Party Picks" />
-      <PosterRow title="Continue Watching" />
     </div>
   );
 };
