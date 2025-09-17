@@ -23,7 +23,6 @@ const Header = () => {
     if (user) {
       // User is signed in
       const {uid,email,displayName,photoURL} = user;
-      console.log("user is signed in");
       dispatch(
         addUser({
           displayName: displayName,
@@ -36,7 +35,6 @@ const Header = () => {
       Navigate("/browse");
     } else {
       // User is signed out
-      console.log("user is signed out");
       dispatch(removeUser());
       Navigate("/login");
     }
@@ -49,17 +47,14 @@ const Header = () => {
   const handleSignOut = () => {
      signOut(auth).then(() => {
         // Sign-out successful.
-        console.log("sign out successful");
       }).catch((error) => {
         // An error happened.
         Navigate("/error");
-        console.log("error signing out: ", error);
       });
   }
   return (
     <header className="fixed w-full z-50 top-0 left-0 bg-gradient-to-b from-black/70 to-transparent">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        {/* left: logo + nav */}
         <div className="flex items-center gap-6">
           <div
             className="font-extrabold text-2xl cursor-pointer select-none"
@@ -75,7 +70,6 @@ const Header = () => {
             <div className="hover:text-white transition cursor-pointer">Live</div>
           </div>
         </div>
-        {/* right: search + kids + avatar */}
         <div className="flex items-center gap-4">
           <div className="hidden sm:block">
             <input

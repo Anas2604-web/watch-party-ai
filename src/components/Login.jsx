@@ -53,7 +53,6 @@ const Login = () => {
                   // An error occurred
                   setError(error.message);
                 });
-                console.log(user);
 
               })
               .catch((error) => {
@@ -69,7 +68,6 @@ const Login = () => {
            .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log("Signed in user:", user);
 
             const { uid, email, displayName, photoURL } = user;
             dispatch(
