@@ -103,7 +103,7 @@ const Header = () => {
     {/* avatar */}
     <div className="w-9 h-9 rounded-md overflow-hidden border border-white/10">
       <img
-        src={user?.photoURL || "https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"}
+        src={"https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"}
         alt="profile"
         className="w-full h-full object-cover"
       />
