@@ -1,34 +1,39 @@
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addMovieTrailer } from "../utils/movieSlice";
 
+const TMDB_PROXY_URL = "https://tmdbproxy-l5awbdon4q-uc.a.run.app";
 
 const useTrailer = (movieId) => {
-     
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const getMovieVideo = async () => {
+    try {
+       const res = await fetch(
+  `${TMDB_PROXY_URL}?path=movie/${movieId}/videos&query=language=en-US`
+);
 
-    const getMovieVideo = async () => {
-        const data = await fetch(
-            "https://api.themoviedb.org/3/movie/" + 
-              movieId + "/videos?language=en-US", 
-               API_OPTIONS);
-         const json = await data.json();
-         if (!json.results) {
-          console.warn("No results for movieId:", movieId, json);
-          return;
-        }
-         const filterData = json.results.filter((video) => video.type === "Trailer");
-         const trailer = filterData.length ?  filterData[13] : json.results[0];
-         console.log(trailer);
-         dispatch(addMovieTrailer(trailer));
+      const json = await res.json();
 
+      if (!json.results || json.results.length === 0) {
+        dispatch(addMovieTrailer(null));
+        return;
+      }
+
+      console.log("Fetched trailers:", json.results);
+
+      const trailer = json.results.find((v) => v.name === "Official Trailer") || json.results[0];
+      dispatch(addMovieTrailer(trailer));
+    } catch (err) {
+      console.error("Error fetching trailer:", err);
+      dispatch(addMovieTrailer(null));
     }
-     useEffect(() => {
-        if (!movieId) return;  
-        getMovieVideo();
-     },[movieId]);
-}
+  };
+
+  useEffect(() => {
+    if (!movieId) return;
+    getMovieVideo();
+  }, [movieId]);
+};
 
 export default useTrailer;
