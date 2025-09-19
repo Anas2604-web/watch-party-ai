@@ -2,7 +2,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       key={movie.id}
-      className="min-w-[200px] bg-white rounded-lg shadow-md overflow-hidden mr-4"
+      className="min-w-[200px] rounded-lg shadow-md overflow-hidden mr-4"
     >
       <img
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
