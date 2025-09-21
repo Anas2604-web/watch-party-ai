@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { togglegptSearch } from "../utils/gptSlice";
 
 
 const BRAND_RED = "#E50914"; 
@@ -51,6 +52,10 @@ const Header = () => {
         // An error happened.
         Navigate("/error");
       });
+  }  
+
+  const handleToggle = () => {
+    dispatch(togglegptSearch());
   }
   return (
     <header className="fixed w-full z-50 top-0 left-0 bg-gradient-to-b from-black/70 to-transparent">
@@ -71,31 +76,6 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden sm:block">
-            <input
-              aria-label="Search"
-              placeholder="Search"
-              className="w-44 md:w-64 px-3 py-2 rounded bg-white/10 placeholder-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-white/20"
-            />
-          </div>
-
-          <button className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded bg-white/5 hover:bg-white/10 transition text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M4 6v12a2 2 0 002 2h9"
-              />
-            </svg>
-            <span className="text-sm">Kids</span>
-          </button>
 
           {/* avatar */}
       {user && (
@@ -108,11 +88,19 @@ const Header = () => {
         className="w-full h-full object-cover"
       />
     </div>
+ 
+
+     <button
+      onClick={handleToggle}
+      className="px-4 py-2 ml-4 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
+    >
+      GPT Search
+    </button>   
 
     {/* sign out button */}
     <button
       onClick={handleSignOut}
-      className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
+      className="px-4 py-2 ml-4 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
     >
       Sign Out
     </button>
