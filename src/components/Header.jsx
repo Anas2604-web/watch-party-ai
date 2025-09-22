@@ -7,7 +7,8 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { togglegptSearch } from "../utils/gptSlice";
-
+import {SUPPORTED_LANGUAGES} from "../utils/constants.js"
+import {changeLanguage} from "../utils/configSlice.js"
 
 const BRAND_RED = "#E50914"; 
 
@@ -57,37 +58,37 @@ const Header = () => {
   const handleToggle = () => {
     dispatch(togglegptSearch());
   }
+
+  const handleLanguage = (e) => {
+    dispatch(changeLanguage(e.target.value))
+  }
   return (
     <header className="fixed w-full z-50 top-0 left-0 bg-gradient-to-b from-black/70 to-transparent">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <div className="flex items-center gap-6">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 ">
+        <div className="flex items-center gap-6 ">
           <div
-            className="font-extrabold text-2xl cursor-pointer select-none"
+            className="font-extrabold text-3xl cursor-pointer select-none"
             style={{ color: BRAND_RED }}
           >
             Watch<span className=" text-white">Party</span>
           </div>
 
-          <div className="hidden md:flex gap-4 text-sm text-gray-200/80">
-            <div className="hover:text-white transition cursor-pointer">Home</div>
-            <div className="hover:text-white transition cursor-pointer">Browse</div>
-            <div className="hover:text-white transition cursor-pointer">My List</div>
-            <div className="hover:text-white transition cursor-pointer">Live</div>
-          </div>
         </div>
         <div className="flex items-center gap-4">
 
           {/* avatar */}
       {user && (
   <div className="flex items-center gap-3">
-    {/* avatar */}
-    <div className="w-9 h-9 rounded-md overflow-hidden border border-white/10">
-      <img
-        src={"https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"}
-        alt="profile"
-        className="w-full h-full object-cover"
-      />
-    </div>
+    <select className="p-2 bg-gray-800 text-white cursor-pointer" 
+    onChange={handleLanguage}
+    >
+      {SUPPORTED_LANGUAGES.map(lang => 
+        <option key= {lang.identifier}
+         value={lang.identifier}>
+          {lang.name} 
+        </option>
+      )}
+    </select>
  
 
      <button
@@ -100,10 +101,18 @@ const Header = () => {
     {/* sign out button */}
     <button
       onClick={handleSignOut}
-      className="px-4 py-2 ml-4 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
+      className="px-4 py-2 ml-2 mr-3 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
     >
       Sign Out
     </button>
+
+    <div className="w-9 h-9 rounded-md overflow-hidden border border-white/10">
+      <img
+        src={"https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"}
+        alt="profile"
+        className="w-full h-full object-cover "
+      />
+    </div>
   </div>
 )}
 

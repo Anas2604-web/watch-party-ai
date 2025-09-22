@@ -4,7 +4,7 @@ const Body = () => {
 
 
   return (
-     <div className="absolute top-0 left-0 z-0">
+    <div className="absolute top-0 left-0 z-0">
     <div className="w-screen h-screen">
       <img
         className="w-full h-full object-cover img-opacity-60"

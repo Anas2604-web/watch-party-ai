@@ -7,3 +7,9 @@ export const API_OPTIONS = {
 };
 
 export const TMDB_API_KEY = "003966dbf2fae324f8ef0c56db1b14ff";
+
+export const SUPPORTED_LANGUAGES = [
+  {identifier: "en", name: "English"},
+  {identifier: "hindi", name: "Hindi"},
+  {identifier: "spanish", name: "Spanish"},
+];

@@ -20,8 +20,6 @@ const useTrailer = (movieId) => {
         return;
       }
 
-      console.log("Fetched trailers:", json.results);
-
       const trailer = json.results.find((v) => v.name === "Official Trailer") || json.results[0];
       dispatch(addMovieTrailer(trailer));
     } catch (err) {
