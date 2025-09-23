@@ -19,6 +19,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
+  const gptSearch = useSelector((store) => store.gpt.showgptSearch);
+
   useEffect(() => {
 
   const unsubscribe =  onAuthStateChanged(auth, (user) => {
@@ -79,23 +81,38 @@ const Header = () => {
           {/* avatar */}
       {user && (
   <div className="flex items-center gap-3">
-    <select className="p-2 bg-gray-800 text-white cursor-pointer" 
-    onChange={handleLanguage}
+    {gptSearch && (
+  <div className="relative inline-block">
+    <select
+      className="p-2 pl-4 pr-8 bg-black/80 text-white rounded-md border border-gray-700 
+                 focus:ring-2 focus:ring-red-600 focus:border-red-600 cursor-pointer 
+                 appearance-none transition duration-200"
+      onChange={handleLanguage}
     >
-      {SUPPORTED_LANGUAGES.map(lang => 
-        <option key= {lang.identifier}
-         value={lang.identifier}>
-          {lang.name} 
+      {SUPPORTED_LANGUAGES.map((lang) => (
+        <option
+          key={lang.identifier}
+          value={lang.identifier}
+          className="bg-gray-900 text-white"
+        >
+          {lang.name}
         </option>
-      )}
+      ))}
     </select>
+
+    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+      ▼
+    </span>
+  </div>
+)}
+
  
 
-     <button
+    <button
       onClick={handleToggle}
       className="px-4 py-2 ml-4 text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
     >
-      GPT Search
+       {gptSearch? "Back to Home" : "GPT Search"}
     </button>   
 
     {/* sign out button */}
