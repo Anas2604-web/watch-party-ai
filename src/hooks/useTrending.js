@@ -16,7 +16,7 @@ const useTrending = () => {
       const json = await res.json();
       dispatch(addTrending(json.results || []));
     } catch (err) {
-      console.error("Error fetching now playing movies:", err);
+      console.error("Error fetching trendin movies:", err);
       dispatch(addTrending([]));
     }
   };

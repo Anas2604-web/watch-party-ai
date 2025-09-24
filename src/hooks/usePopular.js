@@ -16,7 +16,7 @@ const usePopular = () => {
       const json = await res.json();
       dispatch(addPopular(json.results || []));
     } catch (err) {
-      console.error("Error fetching now playing movies:", err);
+      console.error("Error fetching popular movies:", err);
       dispatch(addPopular([]));
     }
   };

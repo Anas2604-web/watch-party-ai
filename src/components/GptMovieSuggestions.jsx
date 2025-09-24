@@ -1,21 +1,72 @@
-// GptMovieSuggestions.jsx
+import { useSelector } from "react-redux";
+import { FaPlay, FaStar } from "react-icons/fa";
+
+const placeholderMovies = [
+  "Movie A", "Movie B", "Movie C", "Movie D", "Movie E",
+  "Movie F", "Movie G", "Movie H", "Movie I", "Movie J"
+];
+
 const GptMovieSuggestions = () => {
+  const movieSuggestions = useSelector((state) => state.gpt.movieNames);
+
+  const moviesWithPosters =
+    movieSuggestions?.filter((movie) => movie.poster_path) || [];
+
+  const showPlaceholders = moviesWithPosters.length === 0;
+
   return (
-    <div className="mt-10">
-      <h2 className="text-2xl font-bold mb-4">Top Picks For You</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {["Inception", "Stranger Things", "Dark", "Breaking Bad", "The Witcher"].map(
-          (movie, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 rounded-lg p-4 shadow hover:scale-105 transition-transform duration-200"
-            >
-              <div className="h-40 bg-gray-700 rounded mb-3"></div>
-              <h3 className="font-semibold">{movie}</h3>
-              <p className="text-sm text-gray-400">Recommended for you</p>
-            </div>
-          )
-        )}
+    <div className="mt-10 px-4">
+      <h2 className="text-2xl font-bold mb-6 text-white">Top Picks For You</h2>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 cursor-pointer">
+        {showPlaceholders
+          ? placeholderMovies.map((movie, index) => (
+              <div
+                key={index}
+                className="relative group bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-pulse"
+              >
+                <div className="h-60 w-full bg-gray-700"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-600 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-600 rounded w-1/2"></div>
+                </div>
+              </div>
+            ))
+          : moviesWithPosters.map((movie, index) => (
+              <div
+                key={index}
+                className="relative group bg-gray-900 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="h-60 w-full object-cover"
+                />
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4">
+                  <FaPlay className="text-4xl text-white mb-2" />
+                  <h3 className="font-semibold text-white text-lg mb-1">
+                    {movie.title}
+                  </h3>
+                  <p className="text-sm text-gray-300">
+                    {movie.release_date
+                      ? new Date(movie.release_date).getFullYear()
+                      : "Unknown Year"}
+                  </p>
+                  {movie.vote_average ? (
+                    <div className="flex items-center mt-1">
+                      <FaStar className="text-yellow-400 mr-1" />
+                      <span className="text-white font-bold">
+                        {movie.vote_average.toFixed(1)}
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-400 mt-1">No rating</p>
+                  )}
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const useTopRated = () => {
       const json = await res.json();
       dispatch(addTopRated(json.results || []));
     } catch (err) {
-      console.error("Error fetching now playing movies:", err);
+      console.error("Error fetching top rated movies:", err);
       dispatch(addTopRated([]));
     }
   };

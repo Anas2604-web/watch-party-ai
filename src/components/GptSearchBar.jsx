@@ -2,29 +2,42 @@ import { useRef, useState } from "react";
 import lang from "../utils/langConstants";
 import { useSelector } from "react-redux";
 import { getMovieSuggestions } from "../utils/gemini"; 
+import useSuggestions from "../hooks/useSuggestions";
 
 const GptSearchBar = () => {
   const LangKey = useSelector((store) => store.config.lang);
   const SearchText = useRef("");
   const [movieNames, setMovieNames] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState([]); // Trigger TMDB search
 
+  useSuggestions(selectedMovies);
 
   const handleGPTSearch = async (e) => {
     e.preventDefault();
 
-    const query = SearchText.current.value;
+    const query = SearchText.current.value.trim();
     if (!query) return;
 
     console.log("User Query:", query);
 
     const names = await getMovieSuggestions(query);
-    console.log("AI Movie Suggestions:", names[0].split(","));
+    console.log("AI Movie Suggestions Raw:", names);
 
     if (!names || names.length === 0) {
       console.log("No movie suggestions found.");
       return;
     }
-    setMovieNames(names);
+
+    // Split comma-separated AI result
+    const movieList = names[0]
+      .split(",")
+      .map((name) => name.trim())
+      .filter(Boolean);
+
+    console.log("Parsed Movie List:", movieList);
+
+    setMovieNames(movieList);
+    setSelectedMovies(movieList); // Trigger TMDB search
   };
 
   return (
@@ -47,16 +60,6 @@ const GptSearchBar = () => {
         </button>
       </form>
 
-      {movieNames.length > 0 && (
-        <div className="mt-4 w-full max-w-2xl bg-gray-900 rounded-lg p-4">
-          <h2 className="text-white font-bold mb-2">AI Movie Suggestions:</h2>
-          <ul className="list-disc list-inside text-white">
-            {movieNames.map((name, idx) => (
-              <li key={idx}>{name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
