@@ -20,7 +20,6 @@ const useSuggestions = (movies) => {
             )}&include_adult=false&language=en-US&page=1`
           );
           const json = await res.json();
-          console.log(`TMDB Search Results for: ${movie}`, json);
           return json.results || [];
         })
       );
@@ -28,11 +27,9 @@ const useSuggestions = (movies) => {
       // Flatten results array
       const allResults = resultsArray.flat();
 
-      console.log("Final TMDB Results:", allResults);
 
       dispatch(getMovieSearch(allResults));
     } catch (err) {
-      console.error("Error fetching movies:", err);
       dispatch(getMovieSearch([]));
     }
   };
