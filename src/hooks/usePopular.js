@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPopular } from "../utils/movieSlice";
 
-const TMDB_PROXY_URL = "https://tmdbproxy-l5awbdon4q-uc.a.run.app";
+const TMDB_PROXY_URL = "https://us-central1-watchparty-3d876.cloudfunctions.net/tmdbProxy";
 
 const usePopular = () => {
   const dispatch = useDispatch();
+
+  const popular = useSelector((state) => state.movies.popularMovies);
 
   const getPopularMovies = async () => {
     try {
@@ -22,7 +24,7 @@ const usePopular = () => {
   };
 
   useEffect(() => {
-    getPopularMovies();
+     !popular &&  getPopularMovies();
   }, []);
 };
 

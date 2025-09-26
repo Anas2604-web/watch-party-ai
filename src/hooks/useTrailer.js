@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addMovieTrailer } from "../utils/movieSlice";
 
-const TMDB_PROXY_URL = "https://tmdbproxy-l5awbdon4q-uc.a.run.app";
+const TMDB_PROXY_URL = "https://us-central1-watchparty-3d876.cloudfunctions.net/tmdbProxy";
 
 const useTrailer = (movieId) => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const useTrailer = (movieId) => {
 
   useEffect(() => {
     if (!movieId) return;
-    getMovieVideo();
+      getMovieVideo();
   }, [movieId]);
 };
 

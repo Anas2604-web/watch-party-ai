@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addNowPlaying } from "../utils/movieSlice";
+import { useSelector } from "react-redux";
 
-const TMDB_PROXY_URL = "https://tmdbproxy-l5awbdon4q-uc.a.run.app";
+const TMDB_PROXY_URL = "https://us-central1-watchparty-3d876.cloudfunctions.net/tmdbProxy";
 
 const useNowPlaying = () => {
+ 
+   const nowPlaying = useSelector((state) => state.movies.nowPlayingMovies);
+
   const dispatch = useDispatch();
 
   const getPlayingMovies = async () => {
@@ -22,7 +26,7 @@ const useNowPlaying = () => {
   };
 
   useEffect(() => {
-    getPlayingMovies();
+    !nowPlaying && getPlayingMovies();
   }, []);
 };
 

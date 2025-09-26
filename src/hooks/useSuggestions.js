@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getMovieSearch } from "../utils/gptSlice";
 
-const TMDB_PROXY_URL = "https://tmdbproxy-l5awbdon4q-uc.a.run.app";
+const TMDB_PROXY_URL = "https://us-central1-watchparty-3d876.cloudfunctions.net/tmdbProxy";
 
 const useSuggestions = (movies) => {
   const dispatch = useDispatch();

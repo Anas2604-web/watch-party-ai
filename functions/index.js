@@ -2,15 +2,13 @@ const { onRequest } = require("firebase-functions/v2/https");
 const { setGlobalOptions } = require("firebase-functions/v2");
 const axios = require("axios");
 const cors = require("cors")({ origin: true });
-require("dotenv").config(); // Load .env variables
 
 // Max instances (optional)
 setGlobalOptions({ maxInstances: 10 });
 
-// TMDB API Token
-const TMDB_API_TOKEN =  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDM5NjZkYmYyZmFlMzI0ZjhlZjBjNTZkYjFiMTRmZiIsIm5iZiI6MTc1ODAyOTMxOS4zMywic3ViIjoiNjhjOTY2MDc1MzEyM2Y1MGNhMGMxMzEwIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.YsPXruTagauoZQ3JZUgvyMVpSn6Thy4ERGHdlvBowCQ";
+// <-- Hardcode your TMDB API Read Access Token here
+const TMDB_API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMDM5NjZkYmYyZmFlMzI0ZjhlZjBjNTZkYjFiMTRmZiIsIm5iZiI6MTc1ODAyOTMxOS4zMywic3ViIjoiNjhjOTY2MDc1MzEyM2Y1MGNhMGMxMzEwIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.YsPXruTagauoZQ3JZUgvyMVpSn6Thy4ERGHdlvBowCQ";
 
-// TMDB Proxy
 exports.tmdbProxy = onRequest((req, res) => {
   cors(req, res, async () => {
     try {
