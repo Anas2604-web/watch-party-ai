@@ -41,27 +41,27 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <form
-        className="flex items-center gap-2 bg-gray-800 rounded-lg shadow-md px-4 py-2 w-full max-w-2xl"
-        onSubmit={handleGPTSearch}
+  <div className="flex flex-col items-center w-full px-3 sm:px-6">
+    <form
+      className="flex flex-col sm:flex-row items-center gap-2 bg-gray-800 rounded-lg shadow-md px-3 sm:px-4 py-2 w-full max-w-2xl"
+      onSubmit={handleGPTSearch}
+    >
+      <input
+        type="text"
+        ref={SearchText}
+        placeholder={lang[LangKey].getSearchplaceholder}
+        className="flex-grow outline-none p-2 rounded-md text-white bg-transparent placeholder-gray-400 text-sm sm:text-base"
+      />
+      <button
+        type="submit"
+        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition text-sm sm:text-base w-full sm:w-auto"
       >
-        <input
-          type="text"
-          ref={SearchText}
-          placeholder={lang[LangKey].getSearchplaceholder}
-          className="flex-grow outline-none p-2 rounded-md text-white bg-transparent placeholder-gray-400"
-        />
-        <button
-          type="submit"
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition"
-        >
-          {lang[LangKey].search}
-        </button>
-      </form>
+        {lang[LangKey].search}
+      </button>
+    </form>
+  </div>
+);
 
-    </div>
-  );
 };
 
 export default GptSearchBar;

@@ -96,25 +96,33 @@ const Login = () => {
     }
 
   return (
+  <div className="w-screen h-screen flex items-center justify-center bg-black relative">
+    {/* Background image with overlay */}
+    <div
+      className="absolute inset-0 bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://i.pinimg.com/1200x/27/5b/14/275b14689a0b5bde35d446c109bb3a19.jpg')",
+      }}
+    ></div>
+    <div className="absolute inset-0 bg-black/60"></div>
 
-    <div className="w-screen h-screen flex items-center justify-center bg-black">
-      
-      {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://i.pinimg.com/1200x/27/5b/14/275b14689a0b5bde35d446c109bb3a19.jpg')",
+    {/* Login Box */}
+    <div className="relative bg-black/75 p-6 sm:p-8 rounded-md w-full max-w-sm sm:max-w-md text-white">
+      {/* Title */}
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+        {isSignedIn ? "Sign In" : "Sign Up"}
+      </h1>
+
+      {/* Form */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
         }}
-      ></div>
-      <div className="absolute inset-0 bg-black/60"></div>
-
-      {/* Login Box */}
-      <div className="relative bg-black/75 p-8 rounded-md w-full max-w-md text-white">
-        <h1 className="text-3xl font-bold mb-6"> {isSignedIn? "Sign In": "Sign Up"} </h1>
-        <form onSubmit={(e) => { e.preventDefault()}} 
-         className="flex flex-col space-y-4">
-          {!isSignedIn && <div className="flex flex-col">
+        className="flex flex-col space-y-4"
+      >
+        {!isSignedIn && (
+          <div className="flex flex-col">
             <label htmlFor="username" className="text-sm mb-1">
               Username
             </label>
@@ -126,61 +134,64 @@ const Login = () => {
               required
               className="p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
             />
-          </div>}
-
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              ref={email}   
-              id="email"
-              name="email"
-              required
-              className="p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
           </div>
+        )}
 
-          <div className="flex flex-col">
-            <label htmlFor="password" className="text-sm mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              ref={password}   
-              id="password"
-              name="password"
-              required
-              className="p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
-          </div>
+        <div className="flex flex-col">
+          <label htmlFor="email" className="text-sm mb-1">
+            Email
+          </label>
+          <input
+            type="email"
+            ref={email}
+            id="email"
+            name="email"
+            required
+            className="p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+          />
+        </div>
 
-          <p className="text-red-500">{error}
-            
-          </p>
+        <div className="flex flex-col">
+          <label htmlFor="password" className="text-sm mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            ref={password}
+            id="password"
+            name="password"
+            required
+            className="p-3 rounded bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+          />
+        </div>
 
-          <button
-            type="submit"
-            onClick={validateUserData}
-            className="bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold mt-4 cursor-pointer"
-          >
-            {isSignedIn ? "Sign In" : "Sign Up"}
-          </button>
-        </form>
+        {/* Error message */}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        <p className="mt-4 text-sm">
-            {isSignedIn ? "New to our platform?" : "Already have an account?"}{" "}
-            <span
-                onClick={handleToggle}
-                className="text-red-600 hover:underline cursor-pointer"
-            >
-                {isSignedIn ? "Sign Up now." : "Sign In now."}
-            </span>
-        </p>
-      </div>
+        {/* Submit button */}
+        <button
+          type="submit"
+          onClick={validateUserData}
+          className="bg-red-600 hover:bg-red-700 transition p-3 rounded font-semibold mt-4 cursor-pointer text-sm sm:text-base"
+        >
+          {isSignedIn ? "Sign In" : "Sign Up"}
+        </button>
+      </form>
+
+      {/* Toggle link */}
+      <p className="mt-4 text-sm text-center">
+        {isSignedIn ? "New to our platform?" : "Already have an account?"}{" "}
+        <span
+          onClick={handleToggle}
+          className="text-red-600 hover:underline cursor-pointer"
+        >
+          {isSignedIn ? "Sign Up now." : "Sign In now."}
+        </span>
+      </p>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Login;
