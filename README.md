@@ -1,12 +1,30 @@
-# React + Vite
+# 🎬 WatchParty
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WatchParty is a modern movie recommendation and streaming discovery app built with **React**, **Firebase**, and **AI-powered movie suggestions** using Google Gemini API.  
+It provides real-time movie data, trending recommendations, and a smooth responsive design — perfect for discovering and enjoying movies with friends.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **AI Powered Movie Suggestions** using Google Gemini  
+- Fetch real-time movie data from **TMDB API**
+- **Firebase Function** as backend proxy for TMDB API  
+- Responsive design for **mobile and desktop**
+- **Now Playing**, **Trending**, and **Search** functionality and much more
+- Simple and clean UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React.js  
+- **Backend:** Firebase Cloud Functions  
+- **APIs:** TMDB API, Google Gemini API  
+- **State Management:** Redux Toolkit  
+- **Styling:** Tailwind CSS  
+- **Deployment:** Vercel / Firebase  
+
+---
+
+
