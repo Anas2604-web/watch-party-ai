@@ -11,7 +11,6 @@ const useSuggestions = (movies) => {
     if (!movies || movies.length === 0) return;
 
     try {
-      // Search all movies in parallel
       const resultsArray = await Promise.all(
         movies.map(async (movie) => {
           const res = await fetch(
@@ -24,7 +23,6 @@ const useSuggestions = (movies) => {
         })
       );
 
-      // Flatten results array
       const allResults = resultsArray.flat();
 
 

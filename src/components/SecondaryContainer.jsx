@@ -6,7 +6,6 @@ const SecondaryContainer = () => {
 
   return (
     <div className="p-2 sm:p-4 min-h-screen mt-56 sm:-mt-20 relative z-20">
-      {/* Horizontal scrollable movie list */}
       {movies.nowPlayingMovies ||
       movies.trendingMovies ||
       movies.popularMovies ||

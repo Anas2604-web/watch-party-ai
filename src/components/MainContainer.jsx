@@ -11,12 +11,10 @@ const MainContainer = () => {
 
   return (
     <div className="relative w-full h-auto">
-      {/* Video title section */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-10">
         <VideoTitle title={title} overview={overview} />
       </div>
 
-      {/* Background video (full width but keeps aspect ratio) */}
       {id && (
         <div className="w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-screen">
           <VideoBackGround movieId={id} />

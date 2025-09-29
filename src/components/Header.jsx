@@ -67,7 +67,6 @@ const Header = () => {
   return (
     <header className="fixed w-full z-50 top-0 left-0 bg-gradient-to-b from-black/70 to-transparent">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between h-12 sm:h-16">
-        {/* Logo */}
         <div className="flex items-center gap-2 sm:gap-6">
           <div
             className="font-extrabold text-lg sm:text-2xl md:text-3xl cursor-pointer select-none"
@@ -77,11 +76,9 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Controls */}
         <div className="flex items-center gap-1 sm:gap-4">
           {user && (
             <div className="flex items-center gap-1 sm:gap-3">
-              {/* Language selector */}
               {gptSearch && (
                 <div className="relative inline-block">
                   <select
@@ -107,7 +104,6 @@ const Header = () => {
                 </div>
               )}
 
-              {/* GPT Search Button */}
               <button
                 onClick={handleToggle}
                 className="px-2 py-1 sm:px-4 sm:py-2 ml-1 sm:ml-4 text-xs sm:text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
@@ -115,7 +111,6 @@ const Header = () => {
                 {gptSearch ? "Back to Home" : "GPT Search"}
               </button>
 
-              {/* Sign Out */}
               <button
                 onClick={handleSignOut}
                 className="px-2 py-1 sm:px-4 sm:py-2 ml-1 sm:ml-2 mr-1 sm:mr-3 text-xs sm:text-sm font-semibold text-white bg-red-600 rounded hover:bg-red-700 transition cursor-pointer"
@@ -123,7 +118,7 @@ const Header = () => {
                 Sign Out
               </button>
 
-              {/* Avatar */}
+
               <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-md overflow-hidden border border-white/10">
                 <img
                   src="https://occ-0-2085-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABQ4lzRUTLSB7HKjP4dTnTAImELHi2b_BB3vh1P6KXmu2FmhGdRdL4oJPe2kU6EffkG38cw6ylJE0zfY3EJ7mm6FwJfpk0DY.png?r=d16"

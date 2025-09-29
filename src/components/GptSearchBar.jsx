@@ -18,13 +18,10 @@ const GptSearchBar = () => {
     const query = SearchText.current.value.trim();
     if (!query) return;
 
-    console.log("User Query:", query);
-
     const names = await getMovieSuggestions(query);
     console.log("AI Movie Suggestions Raw:", names);
 
     if (!names || names.length === 0) {
-      console.log("No movie suggestions found.");
       return;
     }
 
@@ -34,7 +31,6 @@ const GptSearchBar = () => {
       .map((name) => name.trim())
       .filter(Boolean);
 
-    console.log("Parsed Movie List:", movieList);
 
     setMovieNames(movieList);
     setSelectedMovies(movieList); // Trigger TMDB search

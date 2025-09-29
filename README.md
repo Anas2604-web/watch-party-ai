@@ -1,16 +1,18 @@
 # 🎬 WatchParty
 
-WatchParty is a modern movie recommendation and streaming discovery app built with **React**, **Firebase**, and **AI-powered movie suggestions** using Google Gemini API.  
+WatchParty is a modern movie recommendation and streaming discovery app built with **React**, **Firebase**, and **AI-powered movie suggestions** using Google Gemini API Deployed on Vercel and Firebase.  
 It provides real-time movie data, trending recommendations, and a smooth responsive design — perfect for discovering and enjoying movies with friends.
 
 ---
 
 ## 🚀 Features
 
-- **AI Powered Movie Suggestions** using Google Gemini  
+- **AI Powered Movie Suggestions** using Google Gemini 
+- **Firebase** for **authentication** of users 
 - Fetch real-time movie data from **TMDB API**
-- **Firebase Function** as backend proxy for TMDB API  
+- **Firebase Function** as backend proxy for TMDB API   
 - Responsive design for **mobile and desktop**
+- **Multiple Language** options for searching movies 
 - **Now Playing**, **Trending**, and **Search** functionality and much more
 - Simple and clean UI
 

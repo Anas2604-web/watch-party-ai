@@ -23,7 +23,6 @@ const VideoBackGround = ({ movieId }) => {
         referrerPolicy="strict-origin-when-cross-origin"
       ></iframe>
 
-      {/* Gradient overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-black/20 to-transparent"></div>
     </div>
   );

@@ -97,7 +97,6 @@ const Login = () => {
 
   return (
   <div className="w-screen h-screen flex items-center justify-center bg-black relative">
-    {/* Background image with overlay */}
     <div
       className="absolute inset-0 bg-cover bg-center"
       style={{
@@ -107,14 +106,11 @@ const Login = () => {
     ></div>
     <div className="absolute inset-0 bg-black/60"></div>
 
-    {/* Login Box */}
     <div className="relative bg-black/75 p-6 sm:p-8 rounded-md w-full max-w-sm sm:max-w-md text-white">
-      {/* Title */}
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
         {isSignedIn ? "Sign In" : "Sign Up"}
       </h1>
 
-      {/* Form */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -165,10 +161,8 @@ const Login = () => {
           />
         </div>
 
-        {/* Error message */}
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        {/* Submit button */}
         <button
           type="submit"
           onClick={validateUserData}
@@ -178,7 +172,6 @@ const Login = () => {
         </button>
       </form>
 
-      {/* Toggle link */}
       <p className="mt-4 text-sm text-center">
         {isSignedIn ? "New to our platform?" : "Already have an account?"}{" "}
         <span
